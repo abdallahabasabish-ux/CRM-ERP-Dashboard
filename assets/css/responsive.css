@@ -1,0 +1,1417 @@
+/* ======================================================
+   الملف: assets/css/responsive.css
+   الوصف: استعلامات الوسائط للتجاوب مع جميع أحجام الشاشات
+           (Desktop، Laptop، Tablet، Mobile، Large Mobile، Small Mobile)
+   الإصدار: 1.0.0
+   التاريخ: 2026-07-12
+   ====================================================== */
+
+/* ============================================
+   1.  نقاط التوقف (Breakpoints)
+   ============================================ */
+
+/*
+   - الهواتف الصغيرة جداً: < 400px
+   - الهواتف الكبيرة: 400px - 575px
+   - الهواتف اللوحية (Mobile): 576px - 767px
+   - الأجهزة اللوحية (Tablet): 768px - 991px
+   - الحواسيب المحمولة (Laptop): 992px - 1199px
+   - الحواسيب المكتبية (Desktop): >= 1200px
+*/
+
+/* ============================================
+   2.  القاعدة الأساسية (لجميع الشاشات)
+   ============================================ */
+
+/* تم تعريف الأنماط الأساسية في main.css و components.css */
+
+/* ============================================
+   3.  الحواسيب المكتبية الكبيرة (>= 1400px)
+   ============================================ */
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    .stat-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+/* ============================================
+   4.  الحواسيب المكتبية (1200px - 1399px)
+   ============================================ */
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .container {
+        max-width: 1140px;
+    }
+    .stat-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* ============================================
+   5.  الحواسيب المحمولة (992px - 1199px)
+   ============================================ */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        max-width: 960px;
+    }
+    .sidebar {
+        width: var(--sidebar-width);
+    }
+    .stat-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    .kanban-board {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .chat-sidebar {
+        width: 240px;
+    }
+}
+
+/* ============================================
+   6.  الأجهزة اللوحية (768px - 991px)
+   ============================================ */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /* تعديل عرض القائمة الجانبية */
+    .sidebar {
+        width: var(--sidebar-collapsed-width);
+        overflow-x: hidden;
+        transition: width var(--transition-normal);
+    }
+    .sidebar .menu-link span {
+        display: none;
+    }
+    .sidebar .menu-link {
+        justify-content: center;
+        padding: var(--spacing-3) 0;
+    }
+    .sidebar .menu-link svg {
+        margin: 0;
+    }
+    .sidebar .brand-name {
+        display: none;
+    }
+    .sidebar .sidebar-footer .menu-link span {
+        display: none;
+    }
+    .sidebar:hover {
+        width: var(--sidebar-width);
+        overflow-x: visible;
+    }
+    .sidebar:hover .menu-link span {
+        display: inline;
+    }
+    .sidebar:hover .menu-link {
+        justify-content: flex-start;
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+    .sidebar:hover .brand-name {
+        display: inline;
+    }
+    .sidebar:hover .sidebar-footer .menu-link span {
+        display: inline;
+    }
+
+    /* المحتوى الرئيسي */
+    .main-content {
+        margin-right: var(--sidebar-collapsed-width);
+        transition: margin-right var(--transition-normal);
+    }
+    .sidebar:hover ~ .main-content {
+        margin-right: var(--sidebar-width);
+    }
+
+    /* الشريط العلوي */
+    .navbar-search {
+        max-width: 250px;
+    }
+
+    /* إحصائيات */
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .stat-card .stat-value {
+        font-size: var(--font-xl);
+    }
+
+    /* الجداول */
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    /* كانبان */
+    .kanban-board {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--spacing-3);
+    }
+
+    /* المحادثات */
+    .chat-container {
+        flex-direction: column;
+        height: 600px;
+    }
+    .chat-sidebar {
+        width: 100%;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .chat-main {
+        flex: 1;
+        min-height: 0;
+    }
+
+    /* النماذج */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* التبويبات */
+    .tabs {
+        gap: 0;
+    }
+    .tab-item {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-xs);
+    }
+
+    /* الملفات */
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    /* التقويم */
+    .calendar-day {
+        min-height: 32px;
+        font-size: var(--font-xs);
+    }
+}
+
+/* ============================================
+   7.  الهواتف اللوحية (576px - 767px)
+   ============================================ */
+
+@media (min-width: 576px) and (max-width: 767px) {
+    /* القائمة الجانبية مخفية افتراضياً، تظهر عبر زر همبرغر */
+    .sidebar {
+        position: fixed;
+        top: var(--navbar-height);
+        right: -100%;
+        bottom: 0;
+        width: var(--sidebar-width);
+        z-index: 100;
+        transition: right var(--transition-normal);
+        overflow-y: auto;
+        border-left: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+    }
+    .sidebar.open {
+        right: 0;
+    }
+    .sidebar .menu-link span {
+        display: inline;
+    }
+    .sidebar .brand-name {
+        display: inline;
+    }
+    .sidebar .sidebar-footer .menu-link span {
+        display: inline;
+    }
+
+    /* خلفية معتمة عند فتح القائمة الجانبية */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 99;
+        backdrop-filter: blur(2px);
+    }
+    .sidebar-overlay.show {
+        display: block;
+    }
+
+    /* المحتوى الرئيسي */
+    .main-content {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    /* الشريط العلوي */
+    .navbar {
+        padding: 0 var(--spacing-3);
+    }
+    .navbar-brand .brand-name {
+        display: none;
+    }
+    .navbar-search {
+        max-width: 180px;
+        flex: 1;
+    }
+    .navbar-actions .user-name {
+        display: none;
+    }
+    .navbar-actions .nav-btn {
+        padding: var(--spacing-1);
+    }
+    .navbar-actions .nav-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    .navbar-actions .user-avatar {
+        width: 32px;
+        height: 32px;
+    }
+    /* زر همبرغر */
+    .hamburger-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        padding: var(--spacing-2);
+        cursor: pointer;
+        border-radius: var(--radius-sm);
+        transition: background var(--transition-fast);
+        margin-left: var(--spacing-2);
+    }
+    .hamburger-btn:hover {
+        background: var(--hover-bg);
+    }
+
+    /* إحصائيات */
+    .stat-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-3);
+    }
+    .stat-card {
+        padding: var(--spacing-3);
+        gap: var(--spacing-3);
+    }
+    .stat-card .stat-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+    .stat-card .stat-value {
+        font-size: var(--font-lg);
+    }
+    .stat-card .stat-label {
+        font-size: var(--font-xs);
+    }
+
+    /* الصفحات */
+    .page-container {
+        padding: var(--spacing-3);
+    }
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-3);
+    }
+    .page-title {
+        font-size: var(--font-xl);
+    }
+
+    /* البطاقات */
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-3);
+    }
+    .card {
+        padding: var(--spacing-4);
+    }
+
+    /* الجداول */
+    .table-responsive {
+        margin: 0 calc(-1 * var(--spacing-3));
+        padding: 0 var(--spacing-3);
+        overflow-x: auto;
+    }
+    .table th,
+    .table td {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-xs);
+        white-space: nowrap;
+    }
+    .table-actions .btn-icon-only {
+        width: 28px;
+        height: 28px;
+        font-size: var(--font-xs);
+    }
+
+    /* كانبان */
+    .kanban-board {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-4);
+    }
+    .kanban-column {
+        min-height: 200px;
+    }
+
+    /* التقويم */
+    .calendar {
+        padding: var(--spacing-3);
+    }
+    .calendar-day {
+        min-height: 28px;
+        font-size: var(--font-xs);
+    }
+    .calendar-day.has-event::after {
+        bottom: 2px;
+        width: 4px;
+        height: 4px;
+    }
+
+    /* المحادثات */
+    .chat-container {
+        height: 500px;
+        flex-direction: column;
+        border-radius: var(--radius-md);
+    }
+    .chat-sidebar {
+        width: 100%;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color);
+        max-height: 150px;
+        overflow-y: auto;
+    }
+    .chat-main {
+        flex: 1;
+        min-height: 0;
+    }
+    .chat-main .chat-messages .message {
+        max-width: 85%;
+    }
+    .chat-main .chat-input {
+        padding: var(--spacing-2) var(--spacing-3);
+        flex-wrap: wrap;
+    }
+    .chat-main .chat-input input {
+        font-size: var(--font-sm);
+        padding: var(--spacing-2) var(--spacing-3);
+    }
+
+    /* الملفات */
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: var(--spacing-3);
+    }
+    .file-item {
+        padding: var(--spacing-3);
+    }
+    .file-item .file-icon {
+        font-size: 36px;
+    }
+
+    /* المودال */
+    .modal {
+        padding: var(--spacing-4);
+        margin: var(--spacing-2);
+    }
+    .modal-title {
+        font-size: var(--font-lg);
+    }
+
+    /* التوسيت */
+    .toast-container {
+        left: var(--spacing-3);
+        right: var(--spacing-3);
+        bottom: var(--spacing-3);
+        max-width: 100%;
+    }
+    .toast {
+        padding: var(--spacing-3) var(--spacing-4);
+        font-size: var(--font-sm);
+    }
+
+    /* شريط البحث */
+    .search-wrapper {
+        max-width: 100%;
+    }
+    .search-results {
+        max-height: 200px;
+    }
+    .search-result-item {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-sm);
+    }
+
+    /* النماذج */
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-3);
+    }
+    .form-group {
+        margin-bottom: var(--spacing-3);
+    }
+
+    /* الأزرار */
+    .btn {
+        padding: var(--spacing-2) var(--spacing-4);
+        font-size: var(--font-xs);
+    }
+    .btn-lg {
+        padding: var(--spacing-3) var(--spacing-5);
+        font-size: var(--font-sm);
+    }
+    .btn-sm {
+        padding: var(--spacing-1) var(--spacing-3);
+        font-size: 10px;
+    }
+
+    /* التبويبات */
+    .tabs {
+        gap: 0;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+    .tab-item {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-xs);
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* المخططات */
+    .chart-container {
+        height: 220px;
+        padding: var(--spacing-3);
+    }
+    .simple-bar-chart {
+        height: 150px;
+        gap: var(--spacing-2);
+    }
+    .bar {
+        max-width: 30px;
+    }
+
+    /* القوائم المنسدلة */
+    .dropdown-menu {
+        min-width: 160px;
+        right: -20px;
+    }
+
+    /* أزرار الإجراءات */
+    .action-bar {
+        gap: var(--spacing-2);
+        flex-wrap: wrap;
+    }
+    .action-bar .btn {
+        flex: 1 1 auto;
+        min-width: 80px;
+    }
+
+    /* الجدول الزمني */
+    .timeline {
+        padding-right: var(--spacing-4);
+    }
+    .timeline-item {
+        padding-right: var(--spacing-3);
+        margin-bottom: var(--spacing-4);
+    }
+    .timeline-item::before {
+        right: -5px;
+        width: 10px;
+        height: 10px;
+    }
+    .timeline-item .content {
+        padding: var(--spacing-2) var(--spacing-3);
+    }
+    .timeline-item .content .title {
+        font-size: var(--font-sm);
+    }
+}
+
+/* ============================================
+   8.  الهواتف الكبيرة (400px - 575px)
+   ============================================ */
+
+@media (min-width: 400px) and (max-width: 575px) {
+    /* توارث أنماط الهواتف اللوحية (576px - 767px) */
+    /* تعديلات إضافية للشاشات الصغيرة */
+
+    .stat-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-2);
+    }
+    .stat-card {
+        padding: var(--spacing-2) var(--spacing-3);
+        gap: var(--spacing-2);
+        border-radius: var(--radius-md);
+    }
+    .stat-card .stat-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        border-radius: var(--radius-sm);
+    }
+    .stat-card .stat-value {
+        font-size: var(--font-base);
+    }
+    .stat-card .stat-label {
+        font-size: 10px;
+    }
+    .stat-card .stat-change {
+        font-size: 10px;
+    }
+
+    .page-title {
+        font-size: var(--font-lg);
+    }
+    .page-subtitle {
+        font-size: var(--font-xs);
+    }
+
+    .card {
+        padding: var(--spacing-3);
+        border-radius: var(--radius-md);
+    }
+    .card-title {
+        font-size: var(--font-base);
+    }
+    .card-header {
+        margin-bottom: var(--spacing-3);
+        padding-bottom: var(--spacing-2);
+    }
+
+    .table th,
+    .table td {
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: 10px;
+    }
+    .table-actions .btn-icon-only {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+
+    .navbar {
+        padding: 0 var(--spacing-2);
+        height: 50px;
+    }
+    .navbar-brand .brand-name {
+        display: none;
+    }
+    .navbar-search {
+        max-width: 140px;
+    }
+    .search-input {
+        font-size: var(--font-xs);
+        padding: var(--spacing-2) var(--spacing-6) var(--spacing-2) var(--spacing-2);
+    }
+    .search-wrapper .search-icon {
+        right: var(--spacing-2);
+        width: 16px;
+        height: 16px;
+    }
+    .navbar-actions .nav-btn {
+        padding: var(--spacing-1);
+    }
+    .navbar-actions .nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    .navbar-actions .user-avatar {
+        width: 28px;
+        height: 28px;
+    }
+    .navbar-actions .badge {
+        min-width: 16px;
+        height: 16px;
+        font-size: 9px;
+        line-height: 16px;
+        padding: 0 4px;
+    }
+
+    .modal {
+        padding: var(--spacing-3);
+        margin: var(--spacing-2);
+        max-width: 100%;
+    }
+    .modal-title {
+        font-size: var(--font-base);
+    }
+    .modal-header {
+        margin-bottom: var(--spacing-3);
+        padding-bottom: var(--spacing-2);
+    }
+    .modal-footer {
+        flex-direction: column-reverse;
+        gap: var(--spacing-2);
+    }
+    .modal-footer .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .toast {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-xs);
+        border-radius: var(--radius-sm);
+    }
+
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: var(--spacing-2);
+    }
+    .file-item {
+        padding: var(--spacing-2);
+    }
+    .file-item .file-icon {
+        font-size: 28px;
+    }
+    .file-item .file-name {
+        font-size: var(--font-xs);
+    }
+    .file-item .file-size {
+        font-size: 9px;
+    }
+
+    .chat-container {
+        height: 400px;
+        border-radius: var(--radius-md);
+    }
+    .chat-sidebar {
+        max-height: 120px;
+    }
+    .chat-sidebar .chat-list-item {
+        padding: var(--spacing-2) var(--spacing-3);
+        gap: var(--spacing-2);
+    }
+    .chat-sidebar .chat-list-item .avatar {
+        width: 32px;
+        height: 32px;
+    }
+    .chat-sidebar .chat-list-item .info .name {
+        font-size: var(--font-xs);
+    }
+    .chat-sidebar .chat-list-item .info .last-message {
+        font-size: 10px;
+    }
+    .chat-main .chat-messages .message {
+        max-width: 90%;
+        font-size: var(--font-xs);
+        padding: var(--spacing-2) var(--spacing-3);
+    }
+    .chat-main .chat-messages {
+        padding: var(--spacing-2);
+        gap: var(--spacing-2);
+    }
+    .chat-main .chat-input {
+        padding: var(--spacing-2);
+        flex-wrap: wrap;
+    }
+    .chat-main .chat-input input {
+        font-size: var(--font-xs);
+        padding: var(--spacing-1) var(--spacing-3);
+    }
+
+    .calendar {
+        padding: var(--spacing-2);
+    }
+    .calendar-header .month-year {
+        font-size: var(--font-base);
+    }
+    .calendar-day {
+        min-height: 24px;
+        font-size: 10px;
+        border-radius: var(--radius-sm);
+    }
+    .calendar-day.has-event::after {
+        bottom: 1px;
+        width: 3px;
+        height: 3px;
+    }
+
+    .kanban-column {
+        padding: var(--spacing-2);
+        min-height: 150px;
+    }
+    .kanban-column-header {
+        font-size: var(--font-xs);
+        margin-bottom: var(--spacing-2);
+    }
+    .kanban-card {
+        padding: var(--spacing-2) var(--spacing-3);
+        margin-bottom: var(--spacing-2);
+        border-radius: var(--radius-sm);
+    }
+    .kanban-card-title {
+        font-size: var(--font-xs);
+    }
+    .kanban-card-meta {
+        font-size: 10px;
+        flex-wrap: wrap;
+    }
+
+    .chart-container {
+        height: 180px;
+        padding: var(--spacing-2);
+    }
+    .simple-bar-chart {
+        height: 120px;
+        gap: var(--spacing-1);
+    }
+    .bar {
+        max-width: 20px;
+    }
+    .bar-label {
+        font-size: 9px;
+    }
+
+    .timeline {
+        padding-right: var(--spacing-3);
+    }
+    .timeline-item {
+        padding-right: var(--spacing-2);
+        margin-bottom: var(--spacing-3);
+    }
+    .timeline-item::before {
+        right: -4px;
+        width: 8px;
+        height: 8px;
+    }
+    .timeline-item .content {
+        padding: var(--spacing-2);
+        border-radius: var(--radius-sm);
+    }
+    .timeline-item .content .title {
+        font-size: var(--font-xs);
+    }
+    .timeline-item .content .description {
+        font-size: 10px;
+    }
+    .timeline-item .content .meta {
+        font-size: 9px;
+    }
+    .timeline-item .time {
+        font-size: 9px;
+    }
+
+    .tabs .tab-item {
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: 10px;
+    }
+
+    .action-bar {
+        gap: var(--spacing-1);
+        flex-wrap: wrap;
+    }
+    .action-bar .btn {
+        flex: 1 1 auto;
+        min-width: 60px;
+        font-size: 10px;
+        padding: var(--spacing-1) var(--spacing-3);
+    }
+
+    .btn {
+        font-size: 10px;
+        padding: var(--spacing-1) var(--spacing-3);
+        border-radius: var(--radius-sm);
+    }
+    .btn-lg {
+        padding: var(--spacing-2) var(--spacing-4);
+        font-size: var(--font-xs);
+    }
+    .btn-sm {
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: 9px;
+    }
+
+    .form-group {
+        margin-bottom: var(--spacing-2);
+    }
+    .form-label {
+        font-size: var(--font-xs);
+        margin-bottom: var(--spacing-1);
+    }
+    input,
+    select,
+    textarea {
+        padding: var(--spacing-1) var(--spacing-3);
+        font-size: var(--font-xs);
+        border-radius: var(--radius-sm);
+    }
+
+    .badge {
+        font-size: 9px;
+        min-width: 16px;
+        height: 16px;
+        line-height: 16px;
+        padding: 0 var(--spacing-1);
+    }
+
+    .status-tag {
+        font-size: 9px;
+        padding: 0 var(--spacing-2);
+        gap: var(--spacing-1);
+    }
+    .status-tag::before {
+        width: 5px;
+        height: 5px;
+    }
+
+    .loader-overlay .loader {
+        width: 36px;
+        height: 36px;
+        border-width: 3px;
+    }
+}
+
+/* ============================================
+   9.  الهواتف الصغيرة جداً (< 400px)
+   ============================================ */
+
+@media (max-width: 399px) {
+    /* توارث أنماط الهواتف الكبيرة، مع تعديلات إضافية */
+
+    .stat-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-1);
+    }
+    .stat-card {
+        padding: var(--spacing-2);
+        gap: var(--spacing-1);
+        border-radius: var(--radius-sm);
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .stat-card .stat-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    .stat-card .stat-value {
+        font-size: var(--font-sm);
+    }
+    .stat-card .stat-label {
+        font-size: 9px;
+    }
+    .stat-card .stat-change {
+        font-size: 9px;
+    }
+
+    .page-container {
+        padding: var(--spacing-2);
+    }
+    .page-title {
+        font-size: var(--font-base);
+    }
+    .page-subtitle {
+        font-size: 9px;
+    }
+
+    .card {
+        padding: var(--spacing-2);
+        border-radius: var(--radius-sm);
+    }
+    .card-title {
+        font-size: var(--font-sm);
+    }
+    .card-header {
+        margin-bottom: var(--spacing-2);
+        padding-bottom: var(--spacing-1);
+    }
+
+    .table th,
+    .table td {
+        padding: var(--spacing-1);
+        font-size: 9px;
+    }
+    .table-actions .btn-icon-only {
+        width: 20px;
+        height: 20px;
+        font-size: 9px;
+    }
+
+    .navbar {
+        height: 44px;
+        padding: 0 var(--spacing-2);
+    }
+    .navbar-brand .brand-icon {
+        width: 24px;
+        height: 24px;
+    }
+    .navbar-search {
+        max-width: 100px;
+    }
+    .search-input {
+        font-size: 10px;
+        padding: var(--spacing-1) var(--spacing-5) var(--spacing-1) var(--spacing-1);
+    }
+    .search-wrapper .search-icon {
+        right: var(--spacing-1);
+        width: 14px;
+        height: 14px;
+    }
+    .navbar-actions .nav-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    .navbar-actions .user-avatar {
+        width: 24px;
+        height: 24px;
+    }
+    .navbar-actions .badge {
+        min-width: 14px;
+        height: 14px;
+        font-size: 8px;
+        line-height: 14px;
+        padding: 0 3px;
+    }
+    .navbar-actions .nav-btn {
+        padding: var(--spacing-1);
+    }
+
+    .modal {
+        padding: var(--spacing-2);
+        margin: var(--spacing-1);
+        border-radius: var(--radius-md);
+    }
+    .modal-title {
+        font-size: var(--font-sm);
+    }
+    .modal-header {
+        margin-bottom: var(--spacing-2);
+        padding-bottom: var(--spacing-1);
+    }
+
+    .toast {
+        padding: var(--spacing-2);
+        font-size: 10px;
+        gap: var(--spacing-2);
+        border-right-width: 3px;
+    }
+    .toast-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: var(--spacing-1);
+    }
+    .file-item {
+        padding: var(--spacing-1) var(--spacing-2);
+        border-radius: var(--radius-sm);
+    }
+    .file-item .file-icon {
+        font-size: 24px;
+    }
+    .file-item .file-name {
+        font-size: 9px;
+    }
+    .file-item .file-size {
+        font-size: 8px;
+    }
+
+    .chat-container {
+        height: 350px;
+        border-radius: var(--radius-sm);
+    }
+    .chat-sidebar {
+        max-height: 100px;
+    }
+    .chat-sidebar .chat-list-item {
+        padding: var(--spacing-1) var(--spacing-2);
+        gap: var(--spacing-1);
+    }
+    .chat-sidebar .chat-list-item .avatar {
+        width: 24px;
+        height: 24px;
+    }
+    .chat-sidebar .chat-list-item .info .name {
+        font-size: 9px;
+    }
+    .chat-sidebar .chat-list-item .info .last-message {
+        font-size: 8px;
+    }
+    .chat-sidebar .chat-list-item .time {
+        font-size: 8px;
+    }
+    .chat-main .chat-header {
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: var(--font-xs);
+    }
+    .chat-main .chat-messages .message {
+        max-width: 95%;
+        font-size: 10px;
+        padding: var(--spacing-1) var(--spacing-2);
+        border-radius: var(--radius-sm);
+    }
+    .chat-main .chat-messages {
+        padding: var(--spacing-1);
+        gap: var(--spacing-1);
+    }
+    .chat-main .chat-input {
+        padding: var(--spacing-1);
+    }
+    .chat-main .chat-input input {
+        font-size: 10px;
+        padding: var(--spacing-1) var(--spacing-2);
+    }
+
+    .calendar {
+        padding: var(--spacing-1);
+    }
+    .calendar-header .month-year {
+        font-size: var(--font-sm);
+    }
+    .calendar-nav button {
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: 10px;
+    }
+    .calendar-day {
+        min-height: 20px;
+        font-size: 9px;
+        border-radius: var(--radius-sm);
+    }
+    .calendar-day.has-event::after {
+        bottom: 1px;
+        width: 2px;
+        height: 2px;
+    }
+    .calendar-weekday {
+        font-size: 9px;
+        padding: var(--spacing-1) 0;
+    }
+
+    .kanban-column {
+        padding: var(--spacing-1);
+        min-height: 120px;
+        border-radius: var(--radius-md);
+    }
+    .kanban-column-header {
+        font-size: 9px;
+        margin-bottom: var(--spacing-1);
+    }
+    .kanban-card {
+        padding: var(--spacing-1) var(--spacing-2);
+        margin-bottom: var(--spacing-1);
+        border-radius: var(--radius-sm);
+    }
+    .kanban-card-title {
+        font-size: 9px;
+    }
+    .kanban-card-meta {
+        font-size: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-1);
+    }
+    .kanban-card-meta .assignee img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .chart-container {
+        height: 150px;
+        padding: var(--spacing-1);
+        border-radius: var(--radius-sm);
+    }
+    .simple-bar-chart {
+        height: 100px;
+        gap: var(--spacing-1);
+    }
+    .bar {
+        max-width: 16px;
+    }
+    .bar-label {
+        font-size: 8px;
+    }
+
+    .timeline {
+        padding-right: var(--spacing-2);
+    }
+    .timeline::before {
+        right: 4px;
+    }
+    .timeline-item {
+        padding-right: var(--spacing-2);
+        margin-bottom: var(--spacing-2);
+    }
+    .timeline-item::before {
+        right: -3px;
+        width: 6px;
+        height: 6px;
+        border-width: 1px;
+    }
+    .timeline-item .content {
+        padding: var(--spacing-1) var(--spacing-2);
+        border-radius: var(--radius-sm);
+    }
+    .timeline-item .content .title {
+        font-size: 9px;
+    }
+    .timeline-item .content .description {
+        font-size: 9px;
+    }
+    .timeline-item .content .meta {
+        font-size: 8px;
+    }
+    .timeline-item .time {
+        font-size: 8px;
+    }
+
+    .tabs .tab-item {
+        padding: var(--spacing-1);
+        font-size: 9px;
+    }
+
+    .action-bar {
+        gap: var(--spacing-1);
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .action-bar .btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 9px;
+        padding: var(--spacing-1) var(--spacing-2);
+    }
+
+    .btn {
+        font-size: 9px;
+        padding: var(--spacing-1) var(--spacing-2);
+        border-radius: var(--radius-sm);
+        gap: var(--spacing-1);
+    }
+    .btn-lg {
+        padding: var(--spacing-1) var(--spacing-3);
+        font-size: 10px;
+    }
+    .btn-sm {
+        padding: var(--spacing-1);
+        font-size: 8px;
+    }
+
+    .form-group {
+        margin-bottom: var(--spacing-1);
+    }
+    .form-label {
+        font-size: 10px;
+        margin-bottom: var(--spacing-1);
+    }
+    input,
+    select,
+    textarea {
+        padding: var(--spacing-1) var(--spacing-2);
+        font-size: 10px;
+        border-radius: var(--radius-sm);
+    }
+    .form-hint,
+    .form-error {
+        font-size: 9px;
+    }
+
+    .badge {
+        font-size: 8px;
+        min-width: 14px;
+        height: 14px;
+        line-height: 14px;
+        padding: 0 2px;
+    }
+
+    .status-tag {
+        font-size: 8px;
+        padding: 0 var(--spacing-1);
+        gap: var(--spacing-1);
+    }
+    .status-tag::before {
+        width: 4px;
+        height: 4px;
+    }
+
+    .loader-overlay .loader {
+        width: 28px;
+        height: 28px;
+        border-width: 2px;
+    }
+
+    .dropdown-menu {
+        min-width: 140px;
+        right: -10px;
+    }
+    .dropdown-item {
+        padding: var(--spacing-1) var(--spacing-3);
+        font-size: 10px;
+        gap: var(--spacing-2);
+    }
+    .dropdown-item svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .search-results {
+        max-height: 150px;
+    }
+    .search-result-item {
+        padding: var(--spacing-1) var(--spacing-2);
+        gap: var(--spacing-2);
+        font-size: 10px;
+    }
+    .search-result-item .result-text .title {
+        font-size: 10px;
+    }
+    .search-result-item .result-text .subtitle {
+        font-size: 8px;
+    }
+    .search-result-item .result-type {
+        font-size: 8px;
+        padding: 0 var(--spacing-1);
+    }
+}
+
+/* ============================================
+   10. دعم الشاشات ذات الارتفاع الصغير
+   ============================================ */
+
+@media (max-height: 600px) {
+    .sidebar {
+        overflow-y: auto;
+        padding-bottom: var(--spacing-4);
+    }
+    .sidebar .menu-link {
+        padding: var(--spacing-2) var(--spacing-4);
+        font-size: var(--font-sm);
+    }
+    .sidebar .menu-link svg {
+        width: 18px;
+        height: 18px;
+    }
+    .chat-container {
+        height: 350px;
+    }
+    .modal {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    .kanban-column {
+        min-height: 150px;
+    }
+    .page-header {
+        margin-bottom: var(--spacing-3);
+    }
+    .stat-card .stat-value {
+        font-size: var(--font-lg);
+    }
+}
+
+/* ============================================
+   11. دعم الشاشات ذات العرض المتوسط (مثل الأجهزة اللوحية الصغيرة)
+   ============================================ */
+
+@media (min-width: 576px) and (max-width: 991px) {
+    /* تحسين عرض الأعمدة في الجداول */
+    .table-responsive {
+        overflow-x: auto;
+    }
+    /* عرض البطاقات بشكل شبكي */
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    /* عرض الملفات */
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
+/* ============================================
+   12. الشاشات التي تدعم اللمس (Touch Devices)
+   ============================================ */
+
+@media (hover: none) {
+    /* إزالة تأثير hover على الأجهزة التي تعمل باللمس */
+    .btn:hover,
+    .card-clickable:hover,
+    .table tbody tr:hover,
+    .kanban-card:hover,
+    .file-item:hover {
+        transform: none !important;
+        box-shadow: var(--shadow-sm) !important;
+    }
+    .btn-secondary:hover {
+        background: transparent !important;
+    }
+    .dropdown-item:hover {
+        background: transparent !important;
+    }
+    .tab-item:hover {
+        background: transparent !important;
+    }
+
+    /* زيادة مساحة النقر للأزرار */
+    .btn,
+    .btn-icon-only,
+    .dropdown-item,
+    .tab-item,
+    .menu-link {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    .btn-sm {
+        min-height: 36px;
+        min-width: 36px;
+    }
+    .btn-icon-only {
+        min-height: 48px;
+        min-width: 48px;
+    }
+
+    /* تحسين التمرير */
+    .table-responsive,
+    .chat-sidebar,
+    .chat-messages,
+    .search-results {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* منع ظهور القوائم المنسدلة عند hover */
+    .dropdown-menu {
+        display: none;
+    }
+    .dropdown-menu.show {
+        display: block;
+    }
+}
+
+/* ============================================
+   13. دقة عالية (Retina)
+   ============================================ */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* تحسين عرض الصور والأيقونات */
+    .brand-icon,
+    .user-avatar,
+    .file-item .file-icon {
+        image-rendering: auto;
+    }
+    .shadow-sm,
+    .shadow-md,
+    .shadow-lg,
+    .shadow-xl {
+        box-shadow: 0 1px 4px var(--shadow-color), 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+}
+
+/* ============================================
+   14. نهاية الملف
+   ============================================ */
