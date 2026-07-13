@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | نظام ERP + CRM</title>
+    <!-- يتم تحميل CSS الأساسي من التطبيق الرئيسي -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <style>
+        /* أنماط خاصة بصفحة لوحة التحكم */
+        .dashboard-page {
+            padding: var(--spacing-4);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .dashboard-header .page-title {
+            font-size: var(--font-2xl);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+        }
+
+        .dashboard-header .page-subtitle {
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+        }
+
+        .dashboard-header .header-actions {
+            display: flex;
+            gap: var(--spacing-3);
+            align-items: center;
+        }
+
+        /* شبكة الإحصائيات */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-5);
+        }
+
+        /* شبكة المحتوى الرئيسي */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-5);
+        }
+
+        .dashboard-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .dashboard-grid .two-thirds {
+            grid-column: span 2;
+        }
+
+        .dashboard-grid .one-third {
+            grid-column: span 1;
+        }
+
+        /* قسم الأنشطة الأخيرة */
+        .activity-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-5);
+        }
+
+        /* قائمة أفضل العناصر */
+        .top-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .top-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-2) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .top-list li:last-child {
+            border-bottom: none;
+        }
+
+        .top-list .rank {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: var(--radius-full);
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-size: var(--font-xs);
+            font-weight: var(--font-bold);
+            margin-left: var(--spacing-3);
+        }
+
+        .top-list .rank.gold {
+            background: #ffd700;
+            color: #1a1a1a;
+        }
+
+        .top-list .rank.silver {
+            background: #c0c0c0;
+            color: #1a1a1a;
+        }
+
+        .top-list .rank.bronze {
+            background: #cd7f32;
+            color: #ffffff;
+        }
+
+        .top-list .item-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+        }
+
+        .top-list .item-info .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-full);
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .top-list .item-info .name {
+            font-weight: var(--font-medium);
+            color: var(--text-primary);
+            font-size: var(--font-sm);
+        }
+
+        .top-list .item-info .sub {
+            font-size: var(--font-xs);
+            color: var(--text-tertiary);
+        }
+
+        .top-list .item-value {
+            font-weight: var(--font-semibold);
+            color: var(--text-primary);
+            font-size: var(--font-sm);
+        }
+
+        /* استجابة */
+        @media (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-grid .two-thirds,
+            .dashboard-grid .one-third {
+                grid-column: span 1;
+            }
+            .activity-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-page {
+                padding: var(--spacing-2);
+            }
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-2);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-header .page-title {
+                font-size: var(--font-xl);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-page">
+        <!-- رأس الصفحة -->
+        <div class="dashboard-header">
+            <div>
+                <h1 class="page-title">📊 لوحة التحكم</h1>
+                <p class="page-subtitle" id="dashboardDate">مرحباً بك في نظام ERP + CRM</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-secondary btn-sm" id="refreshDashboard" title="تحديث البيانات">
+                    🔄 تحديث
+                </button>
+                <button class="btn btn-secondary btn-sm" id="exportDashboard" title="تصدير التقرير">
+                    📥 تصدير
+                </button>
+            </div>
+        </div>
+
+        <!-- بطاقات الإحصائيات -->
+        <div class="stats-grid" id="statsContainer">
+            <!-- سيتم تحميل البطاقات ديناميكياً عبر JavaScript -->
+        </div>
+
+        <!-- شبكة المحتوى الرئيسي -->
+        <div class="dashboard-grid">
+            <!-- المخطط البياني (2/3) -->
+            <div class="two-thirds">
+                <div class="card" id="chartCard">
+                    <div class="card-header">
+                        <h3 class="card-title">📈 الإيرادات والمصروفات</h3>
+                        <div class="card-actions">
+                            <select id="chartPeriod" class="form-control" style="width:auto;padding:var(--spacing-1) var(--spacing-3);font-size:var(--font-xs);">
+                                <option value="weekly">أسبوعي</option>
+                                <option value="monthly" selected>شهري</option>
+                                <option value="yearly">سنوي</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="chartContainer" style="height:280px;position:relative;">
+                            <!-- سيتم رسم المخطط عبر JavaScript -->
+                            <div class="loader" style="margin:auto;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- التقويم (1/3) -->
+            <div class="one-third">
+                <div class="card" id="calendarCard">
+                    <div class="card-header">
+                        <h3 class="card-title">📅 التقويم</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="calendarContainer">
+                            <!-- سيتم عرض التقويم عبر JavaScript -->
+                            <div style="text-align:center;padding:var(--spacing-4);color:var(--text-tertiary);">
+                                جاري تحميل التقويم...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم الأنشطة الأخيرة -->
+        <div class="activity-section">
+            <!-- الجدول الزمني -->
+            <div class="card" id="timelineCard">
+                <div class="card-header">
+                    <h3 class="card-title">⏳ آخر النشاطات</h3>
+                    <a href="#logs" class="btn btn-sm btn-secondary">عرض الكل</a>
+                </div>
+                <div class="card-body">
+                    <div id="timelineContainer">
+                        <!-- سيتم عرض الجدول الزمني عبر JavaScript -->
+                        <div style="text-align:center;padding:var(--spacing-4);color:var(--text-tertiary);">
+                            جاري تحميل النشاطات...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الإشعارات -->
+            <div class="card" id="notificationsCard">
+                <div class="card-header">
+                    <h3 class="card-title">🔔 الإشعارات</h3>
+                    <button class="btn btn-sm btn-secondary" id="markAllRead">تحديد الكل كمقروء</button>
+                </div>
+                <div class="card-body">
+                    <div id="notificationsContainer">
+                        <!-- سيتم عرض الإشعارات عبر JavaScript -->
+                        <div style="text-align:center;padding:var(--spacing-4);color:var(--text-tertiary);">
+                            جاري تحميل الإشعارات...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- أفضل العناصر -->
+        <div class="dashboard-grid" style="margin-bottom:0;">
+            <div class="one-third">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🏆 أفضل الخدمات</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="top-list" id="topServices">
+                            <!-- سيتم تحميلها عبر JavaScript -->
+                            <li style="text-align:center;color:var(--text-tertiary);padding:var(--spacing-4);">
+                                جاري التحميل...
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="one-third">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">🌟 أفضل الموظفين</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="top-list" id="topEmployees">
+                            <li style="text-align:center;color:var(--text-tertiary);padding:var(--spacing-4);">
+                                جاري التحميل...
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="one-third">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">👥 أفضل العملاء</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="top-list" id="topCustomers">
+                            <li style="text-align:center;color:var(--text-tertiary);padding:var(--spacing-4);">
+                                جاري التحميل...
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- تحميل JavaScript الخاص بالصفحة (سيتم استيراده كـ module) -->
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>
