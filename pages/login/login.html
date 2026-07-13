@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | نظام ERP + CRM</title>
+    <!-- يتم تحميل CSS الأساسي من التطبيق الرئيسي، لكن الصفحة قد تحتاج إلى أنماط خاصة -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <style>
+        /* أنماط خاصة بصفحة تسجيل الدخول */
+        body {
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: var(--spacing-4);
+            font-family: var(--font-family);
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: var(--spacing-6);
+            border: 1px solid var(--border-color);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: var(--spacing-5);
+        }
+
+        .login-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            font-size: var(--font-2xl);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .login-logo img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .login-title {
+            font-size: var(--font-xl);
+            font-weight: var(--font-semibold);
+            color: var(--text-primary);
+            margin-top: var(--spacing-3);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+        }
+
+        .login-form .form-group {
+            margin-bottom: var(--spacing-4);
+        }
+
+        .login-form label {
+            display: block;
+            font-weight: var(--font-medium);
+            margin-bottom: var(--spacing-1);
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+        }
+
+        .login-form .input-wrapper {
+            position: relative;
+        }
+
+        .login-form .input-wrapper .input-icon {
+            position: absolute;
+            right: var(--spacing-3);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            font-size: 18px;
+        }
+
+        .login-form .input-wrapper input {
+            width: 100%;
+            padding: var(--spacing-3) var(--spacing-5) var(--spacing-3) var(--spacing-3);
+            padding-right: var(--spacing-8);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: var(--font-base);
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .login-form .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--selected-bg);
+        }
+
+        .login-form .input-wrapper input.is-invalid {
+            border-color: var(--color-danger);
+        }
+
+        .login-form .input-wrapper .toggle-password {
+            position: absolute;
+            left: var(--spacing-3);
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .login-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: var(--spacing-3) 0 var(--spacing-4);
+            font-size: var(--font-sm);
+        }
+
+        .login-options .remember-me {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .login-options .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--color-primary);
+        }
+
+        .login-options .forgot-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: var(--font-medium);
+        }
+
+        .login-options .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: var(--spacing-3);
+            background: var(--color-primary);
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-base);
+            font-weight: var(--font-semibold);
+            cursor: pointer;
+            transition: background var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-2);
+        }
+
+        .login-btn:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .login-error {
+            display: none;
+            background: rgba(255, 86, 48, 0.1);
+            border: 1px solid var(--color-danger);
+            color: var(--color-danger);
+            padding: var(--spacing-3);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-4);
+            font-size: var(--font-sm);
+            text-align: center;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: var(--spacing-5);
+            font-size: var(--font-sm);
+            color: var(--text-tertiary);
+        }
+
+        .login-footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* تأثير الزجاج البسيط */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dark .glass-effect {
+            background: rgba(30, 30, 30, 0.7);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* استجابة */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: var(--spacing-4);
+                margin: var(--spacing-2);
+            }
+            .login-title {
+                font-size: var(--font-lg);
+            }
+            .login-logo {
+                font-size: var(--font-xl);
+            }
+            .login-options {
+                flex-direction: column;
+                gap: var(--spacing-2);
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container glass-effect">
+        <!-- رأس صفحة الدخول -->
+        <div class="login-header">
+            <a href="#" class="login-logo">
+                <img src="../../assets/icons/logo.svg" alt="شعار التطبيق" width="48" height="48">
+                <span>نظام ERP</span>
+            </a>
+            <h1 class="login-title">تسجيل الدخول</h1>
+            <p class="login-subtitle">أدخل بيانات حسابك للوصول إلى لوحة التحكم</p>
+        </div>
+
+        <!-- رسالة الخطأ العامة -->
+        <div id="loginError" class="login-error"></div>
+
+        <!-- نموذج تسجيل الدخول -->
+        <form id="loginForm" class="login-form" novalidate>
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">📧</span>
+                    <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required autofocus>
+                </div>
+                <div class="form-error" id="emailError" style="display:none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+                    <button type="button" class="toggle-password" id="togglePassword" aria-label="إظهار/إخفاء كلمة المرور">👁️</button>
+                </div>
+                <div class="form-error" id="passwordError" style="display:none;"></div>
+            </div>
+
+            <div class="login-options">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe" checked>
+                    تذكرني
+                </label>
+                <a href="#" class="forgot-link" id="forgotPassword">نسيت كلمة المرور؟</a>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                <span id="loginBtnText">تسجيل الدخول</span>
+                <span id="loginSpinner" style="display:none;">⏳</span>
+            </button>
+        </form>
+
+        <div class="login-footer">
+            ليس لديك حساب؟ <a href="#">تواصل مع المسؤول</a>
+        </div>
+    </div>
+
+    <!-- تحميل JavaScript الخاص بالصفحة (سيتم استيراده كـ module) -->
+    <script type="module" src="login.js"></script>
+</body>
+</html>
